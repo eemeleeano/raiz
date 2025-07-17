@@ -14,3 +14,6 @@ def get_harvests():
             "quantity": "10",
         },
     ]
+
+if __name__ == "__main__":
+    app.run(port=5001)
