@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  ui:
+    build: ./ui
+    ports: 
+      - "127.0.0.1:6000:5000"
+
+  api:
+    build: ./api
+    ports:
+      - "127.0.0.1:6001:5001"

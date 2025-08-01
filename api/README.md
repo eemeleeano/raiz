@@ -7,5 +7,5 @@ Handles all server-side logic.
 To run the server for development, run
 
 ``` bash
-python3 everything.py
+python3 api.py
 ```
