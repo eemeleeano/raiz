@@ -8,6 +8,6 @@ COPY . .
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-EXPOSE 5000
+EXPOSE 9000
 
 CMD ["python3", "ui.py"]
