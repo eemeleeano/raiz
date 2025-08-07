@@ -4,7 +4,7 @@ services:
   ui:
     build: ./ui
     ports: 
-      - "9000:9000"
+      - "5173:5173"
 
   api:
     build: ./api

@@ -1,13 +1,11 @@
-FROM python:3.13
+FROM node:latest
 
 WORKDIR /ui
 
 COPY . .
 
-# Install dependencies.
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+RUN npm install
 
-EXPOSE 9000
+EXPOSE 5173
 
-CMD ["python3", "ui.py"]
+CMD ["npm", "run", "dev"]
