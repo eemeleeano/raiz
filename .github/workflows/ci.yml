@@ -1,0 +1,57 @@
+name: continuous integration
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    test-documentation:
+        runs-on: ubuntu-latest
+        name: test sphinx documentation build
+
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v4
+
+            - name: python setup
+              uses: actions/setup-python@v4
+              with:
+                python-version: '3.13'
+
+            - name: install dependencies
+              run: |
+                python -m pip install --upgrade pip
+                pip install -r docs/requirements.txt
+
+            - name: build documentation
+              run: |
+                cd docs
+                SPHINXOPTS="-W" make html
+
+    test-docker:
+        runs-on: ubuntu-latest
+        name: test docker containers
+
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v4
+
+            - name: docker buildx setup
+              uses: docker/setup-buildx-action@v3
+
+            - name: build and test docker images
+              run: |
+                docker compose up -d --build
+                sleep 30
+                docker compose ps
+
+                if docker compose ps | grep -q "Exit"; then
+                    echo "Some containers exited unexpectedly"
+                    docker compose logs
+                    exit 1
+                fi
+
+                echo "All containers are running"
+                docker compose down -v
