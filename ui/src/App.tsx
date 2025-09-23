@@ -1,4 +1,4 @@
-import PopularHarvests from './components/PopularHarvests'
+import HarvestFeed from './components/HarvestFeed'
 import PopularGrowers from './components/PopularGrowers'
 
 const Header = () => {
@@ -13,8 +13,8 @@ function App() {
       <Header />
       <p>Welcome!</p>
 
-      <PopularHarvests k="5" />
-      <PopularGrowers k="5" />
+      <PopularGrowers />
+      <HarvestFeed />
     </>
   )
 }
