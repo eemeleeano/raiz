@@ -10,3 +10,4 @@ technical documentation
 
    usage
    development
+   design
