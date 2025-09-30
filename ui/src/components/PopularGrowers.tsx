@@ -1,11 +1,13 @@
 import growerService from '../services/growers'
 
 const View = ({ grower }) => {
+    const url = "grower/" + String(grower.id - 1);
+
     return (
-        <li>
-            {grower.name}
-            {grower.location}
-            <img src={grower.image} />
+        <li className="grower-view">
+            <a href={url}>
+                {grower.name} - {grower.location}
+            </a>
         </li>
     )
 }

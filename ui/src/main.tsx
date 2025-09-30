@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 import App from './App.jsx'
 import Grower from './Grower.js'
 
+import './style.css';
+
 createRoot(document.getElementById('root')).render(
     <BrowserRouter>
         <Routes>

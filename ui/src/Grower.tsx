@@ -7,7 +7,7 @@ function Grower() {
 
     return ( 
         <>
-            <h1>{grower.name}</h1>
+            <h1 className="grower-title">{grower.name}</h1>
             <img src={grower.image} />
             <p>
                 Bio goes here...
