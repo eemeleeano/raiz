@@ -1,9 +1,11 @@
 import { useParams } from 'react-router';
 import growerService from './services/growers';
+import harvestService from './services/harvests';
 
 function Grower() {
     let { id } = useParams();
     const grower = growerService.getById(id);
+    const harvests = harvestService.getByGrowerId(grower.id);
 
     return ( 
         <>
@@ -12,6 +14,13 @@ function Grower() {
             <p>
                 Bio goes here...
             </p>
+
+            <h2>Harvests</h2>
+            <ul>
+                {harvests.map(harvest => <>
+                    <img className="img-medium" src={harvest.image}/>
+                </>)}
+            </ul>
         </>
     );
 }

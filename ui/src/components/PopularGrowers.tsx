@@ -1,7 +1,7 @@
 import growerService from '../services/growers'
 
 const View = ({ grower }) => {
-    const url = "grower/" + String(grower.id - 1);
+    const url = "growers/" + String(grower.id - 1);
 
     return (
         <li className="grower-view">
