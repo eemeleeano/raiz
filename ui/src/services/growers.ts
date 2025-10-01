@@ -1,5 +1,6 @@
 import Grower from "../entities/grower";
 
+// mock data.
 const GROWERS = [
     new Grower(1, "Evergreen Growers", 11237, "/images/farm1.jpg"),
     new Grower(2, "Forever Farms", 11216, "/images/farm2.jpg"),
@@ -11,6 +12,7 @@ function getAll(): Array<Grower> {
     return GROWERS;
 }
 
+// getById: returns grower associated to id.
 function getById(id: string): Grower {
     return GROWERS[id];
 } 

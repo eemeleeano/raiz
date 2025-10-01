@@ -2,6 +2,9 @@ import { useParams } from 'react-router';
 import growerService from './services/growers';
 import harvestService from './services/harvests';
 
+// main page for growers. this is where they will have information about
+// their operation, images, bios, harvests available and maybe contact info.
+
 function Grower() {
     let { id } = useParams();
     const grower = growerService.getById(id);
@@ -19,7 +22,7 @@ function Grower() {
             <ul>
                 {harvests.map(h => 
                     <li key={String(h.id)}>
-                        <a href={"harvests/" + String(Number(h.id) - 1)}>
+                        <a href={"/harvests/" + String(Number(h.id) - 1)}>
                             <img className="img-medium" src={h.image} />
                             {h.name}
                         </a>
