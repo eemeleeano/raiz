@@ -120,6 +120,25 @@ a:hover {
   color: var(--accent-hover);
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.img-small {
+  max-width: 200px;
+}
+
+.img-medium {
+  max-width: 400px;
+}
+
+.img-large {
+  max-width: 600px;
+}
+
 /* Utility Classes */
 .text-center { text-align: center; }
 .text-muted { color: var(--text-secondary); }
