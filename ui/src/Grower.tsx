@@ -17,9 +17,10 @@ function Grower() {
 
             <h2>Harvests</h2>
             <ul>
-                {harvests.map(harvest => <>
-                    <img className="img-medium" src={harvest.image}/>
-                </>)}
+                {harvests.map(harvest => 
+                    <li key={String(harvest.id)}>
+                        <img className="img-medium" src={harvest.image}/>
+                    </li>)}
             </ul>
         </>
     );
