@@ -22,7 +22,7 @@ function Grower() {
             <ul>
                 {harvests.map(h => 
                     <li key={String(h.id)}>
-                        <a href={"/harvests/" + String(Number(h.id) - 1)}>
+                        <a href={"/harvests/" + String(Number(h.id))}>
                             <img className="img-medium" src={h.image} />
                             {h.name}
                         </a>
