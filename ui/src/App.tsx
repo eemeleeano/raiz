@@ -10,7 +10,7 @@ function App() {
       <h1>Raiz</h1>
       <h4>Food Network</h4>
 
-      <h2>Popular growers</h2>
+      <h2>Growers</h2>
       <ul>
           {growers.map(g => 
             <li className="grower-view" key={String(g.id)}>
@@ -20,12 +20,14 @@ function App() {
             </li>)}
       </ul>
       
-      <h2>Harvests nearby</h2>
+      <h2>Harvests</h2>
       <ul>
         {harvests.map(h =>  
           <li key={String(h.id)}>
-            {h.name}
-            <img src={h.image} />
+            <a href={"harvests/" + String(Number(h.id) - 1)}>
+              <img className="img-medium" src={h.image} />
+              {h.name}
+            </a>
           </li>)}
       </ul>
     </>
