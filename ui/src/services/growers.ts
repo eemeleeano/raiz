@@ -19,7 +19,7 @@ async function getAll(): Promise<Array<Grower>> {
                 growerObject.id,
                 growerObject.name,
                 growerObject.location,
-                `/images/growers/${growerObject.id}.jpg`
+                `/images/growers/farm${growerObject.id}.jpg`
             );
             growers.push(newGrower);
         });
@@ -31,8 +31,24 @@ async function getAll(): Promise<Array<Grower>> {
 }
 
 // getById: returns grower associated to id.
-function getById(id: string): Grower {
-    return GROWERS[id];
+async function getById(id: string): Promise<Grower> {
+    var grower: Grower = null;
+
+    try {
+        const response = await axios.get(`http://localhost:9001/growers/${id}`);
+        const growerObject = response.data;
+
+        grower = new Grower(
+            growerObject.id,
+            growerObject.name,
+            growerObject.location,
+            `/images/growers/farm${growerObject.id}.jpg`
+        );
+    } catch (error) {
+        console.log(error)
+    }
+
+    return grower;
 } 
 
 export default {

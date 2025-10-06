@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Harvest from "../entities/harvest";
 
 // mock data.
@@ -13,8 +14,25 @@ function getAll(): Array<Harvest> {
 }
 
 // getByGrowerId: returns harvests associated to a grower id.
-function getByGrowerId(id: Number): Array<Harvest> {
-    return HARVESTS.filter(harvest => harvest.grower === id);
+async function getByGrowerId(id: Number): Promise<Array<Harvest>> {
+    var harvests: Array<Harvest> = [];
+
+    try {
+        const response = await axios.get(`http://localhost:9001/harvests?grower_id=${id}`);
+            response.data.map((harvestObject) => {
+                const newHarvest = new Harvest(
+                    harvestObject.id,
+                    harvestObject.name,
+                    harvestObject.location,
+                    `/images/growers/farm${harvestObject.id}.jpg`
+                );
+                harvests.push(newHarvest);
+            });
+    } catch (error) {
+        console.log(error)
+    }
+
+    return harvests;
 }
 
 // getById: returns harvest associated to id.

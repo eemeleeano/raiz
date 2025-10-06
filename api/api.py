@@ -21,8 +21,21 @@ def get_growers():
     } for grower in result]
 
 
-@app.route('/harvests')
-def get_harvests():
+@app.route('/growers/<int:id>')
+def get_grower(id):
+    global cursor
+    result = cursor.execute(f'SELECT * FROM growers WHERE id = {id}')
+    grower = result.fetchone()
+
+    return {
+        'id': grower[0],
+        'name': grower[1],
+        'location': grower[2],
+    }
+
+
+@app.route('/harvests?grower_id=<grower_id>')
+def get_harvests(grower_id=None):
     global cursor
     result = cursor.execute('SELECT * FROM harvests')
 

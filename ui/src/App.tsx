@@ -23,7 +23,7 @@ function App() {
       <ul>
           {growers.map(g => 
             <li className="grower-view" key={String(g.id)}>
-              <a href={"growers/" + String(Number(g.id) - 1)}>
+              <a href={"growers/" + String(Number(g.id))}>
                 {g.name} - {String(g.location)}
               </a>
             </li>)}
