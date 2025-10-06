@@ -1,9 +1,18 @@
+import { useState, useEffect } from 'react';
 import harvestService from './services/harvests';
 import growerService from './services/growers';
 
 function App() {
   const harvests = harvestService.getAll();
-  const growers = growerService.getAll();
+
+  const [growers, setGrowers] = useState([]);
+  useEffect(() => {
+    growerService
+      .getAll()
+      .then(response => {
+        setGrowers(response)
+      });
+  }, []);
 
   return (
     <>
