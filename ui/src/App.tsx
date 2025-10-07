@@ -3,14 +3,20 @@ import harvestService from './services/harvests';
 import growerService from './services/growers';
 
 function App() {
-  const harvests = harvestService.getAll();
-
   const [growers, setGrowers] = useState([]);
+  const [harvests, setHarvests] = useState([]);
+
   useEffect(() => {
     growerService
       .getAll()
       .then(response => {
-        setGrowers(response)
+        setGrowers(response);
+      });
+
+    harvestService
+      .getAll()
+      .then(response => {
+        setHarvests(response);
       });
   }, []);
 

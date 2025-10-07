@@ -1,7 +1,7 @@
 import db
 
 import sqlite3
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 
 
@@ -34,10 +34,27 @@ def get_grower(id):
     }
 
 
-@app.route('/harvests?grower_id=<grower_id>')
-def get_harvests(grower_id=None):
+@app.route('/harvests')
+def get_harvests():
+    grower_id = request.args.get('grower_id', None)
+
     with sqlite3.connect(db.NAME) as con:
-        result = con.execute('SELECT * FROM harvests')
+        query = 'SELECT id, name FROM available_harvests INNER JOIN harvests ON id = harvest_id'
+        if grower_id:
+            query += f' WHERE grower_id = {grower_id}'
+        result = con.execute(query)
+
+    return [{
+        'id': harvest[0],
+        'name': harvest[1]
+    } for harvest in result]
+
+
+@app.route('/harvests/<int:id>')
+def get_harvest(id):
+    with sqlite3.connect(db.NAME) as con:
+        query = f'SELECT id, name FROM harvests WHERE id = {id}'
+        result = con.execute(query)
 
     return [{
         'id': harvest[0],

@@ -1,13 +1,6 @@
 import axios from 'axios';
 import Grower from "../entities/grower";
 
-// // mock data.
-// const GROWERS = [
-//     new Grower(1, "Evergreen Growers", 11237, "/images/farm1.jpg"),
-//     new Grower(2, "Forever Farms", 11216, "/images/farm2.jpg"),
-//     new Grower(3, "Red River Acres", 11301, "/images/farm3.jpg"),
-// ];
-
 // getAll: returns all harvests from source (currently mock data)
 async function getAll(): Promise<Array<Grower>> {
     var growers: Array<Grower> = [];

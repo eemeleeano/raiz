@@ -9,7 +9,6 @@ import harvestService from './services/harvests';
 
 function Grower() {
     let { id } = useParams();
-
     const [grower, setGrower] = useState(null);
     const [harvests, setHarvests] = useState([]);
 
@@ -19,10 +18,10 @@ function Grower() {
                 setGrower(result);
             });
         
-        // harvestService.getByGrowerId(Number(id))
-        //     .then((result) => {
-        //         setHarvests(result)
-        //     });
+        harvestService.getByGrowerId(Number(id))
+            .then((result) => {
+                setHarvests(result)
+            });
     }, []);
 
     if (grower) {
@@ -35,7 +34,7 @@ function Grower() {
                 </p>
 
                 <h2>Harvests</h2>
-                {/* <ul>
+                <ul>
                     {harvests.map(h => 
                         <li key={String(h.id)}>
                             <a href={"/harvests/" + String(Number(h.id))}>
@@ -43,7 +42,7 @@ function Grower() {
                                 {h.name}
                             </a>
                         </li>)}
-                </ul> */}
+                </ul>
             </>
         );
     } else {

@@ -1,16 +1,25 @@
 import axios from 'axios';
 import Harvest from "../entities/harvest";
 
-// mock data.
-const HARVESTS = [
-    new Harvest(1, 1, "Meyer Lemon", "/images/harvest1.jpg"),
-    new Harvest(2, 3, "Arugula", "/images/harvest2.jpg"),
-    new Harvest(3, 2, "Green Cabbage", "/images/harvest3.jpg"),
-];
-
 // getAll: returns all harvests from source (currently mock data).
-function getAll(): Array<Harvest> {
-    return HARVESTS;
+async function getAll(): Promise<Array<Harvest>> {
+    var harvests: Array<Harvest> = [];
+
+    try {
+        const response = await axios.get(`http://localhost:9001/harvests`);
+            response.data.map((harvestObject) => {
+                const newHarvest = new Harvest(
+                    harvestObject.id,
+                    harvestObject.name,
+                    `/images/harvests/harvest${harvestObject.id}.jpg`
+                );
+                harvests.push(newHarvest);
+            });
+    } catch (error) {
+        console.log(error)
+    }
+
+    return harvests;
 }
 
 // getByGrowerId: returns harvests associated to a grower id.
@@ -23,8 +32,7 @@ async function getByGrowerId(id: Number): Promise<Array<Harvest>> {
                 const newHarvest = new Harvest(
                     harvestObject.id,
                     harvestObject.name,
-                    harvestObject.location,
-                    `/images/growers/farm${harvestObject.id}.jpg`
+                    `/images/harvests/harvest${harvestObject.id}.jpg`
                 );
                 harvests.push(newHarvest);
             });
@@ -36,8 +44,23 @@ async function getByGrowerId(id: Number): Promise<Array<Harvest>> {
 }
 
 // getById: returns harvest associated to id.
-function getById(id: Number): Harvest {
-    return HARVESTS.filter(harvest => harvest.id === id)[0];
+async function getById(id: Number): Promise<Harvest> {
+    var harvest: Harvest = null;
+
+    try {
+        const response = await axios.get(`http://localhost:9001/harvests/${id}`);
+            response.data.map((harvestObject) => {
+                harvest = new Harvest(
+                    harvestObject.id,
+                    harvestObject.name,
+                    `/images/harvests/harvest${harvestObject.id}.jpg`
+                );
+            });
+    } catch (error) {
+        console.log(error)
+    }
+
+    return harvest;
 }
 
 export default {
