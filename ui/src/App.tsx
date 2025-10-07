@@ -1,9 +1,24 @@
+import { useState, useEffect } from 'react';
 import harvestService from './services/harvests';
 import growerService from './services/growers';
 
 function App() {
-  const harvests = harvestService.getAll();
-  const growers = growerService.getAll();
+  const [growers, setGrowers] = useState([]);
+  const [harvests, setHarvests] = useState([]);
+
+  useEffect(() => {
+    growerService
+      .getAll()
+      .then(response => {
+        setGrowers(response);
+      });
+
+    harvestService
+      .getAll()
+      .then(response => {
+        setHarvests(response);
+      });
+  }, []);
 
   return (
     <>
@@ -14,7 +29,7 @@ function App() {
       <ul>
           {growers.map(g => 
             <li className="grower-view" key={String(g.id)}>
-              <a href={"growers/" + String(Number(g.id) - 1)}>
+              <a href={"growers/" + String(Number(g.id))}>
                 {g.name} - {String(g.location)}
               </a>
             </li>)}

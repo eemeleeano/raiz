@@ -1,3 +1,5 @@
+NAME = 'raiz.db'
+
 # Database table schemas
 TABLES = {
     'growers': {
